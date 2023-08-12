@@ -1,0 +1,42 @@
+<html>
+<head>   
+<title>Associate Employee </title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <datalist id="employee-list">
+            {% for employee in employee %}
+                <option value="{{ employee }}">{{ employee }}</option>
+            {% endfor %}
+        </datalist>
+
+
+        <button type="submit">Add Employee to Company</button>
+    </form>
+    </body>
+    <script>
+      
+         document.addEventListener('DOMContentLoaded', function () {
+     
+        const employeeInput = document.querySelector('#id_employee');
+        const employeeDatalist = document.querySelector('#employee-list');
+
+        employeeInput.addEventListener('input', function () {
+            const inputValue = employeeInput.value.toLowerCase();
+            const options = employeeDatalist.querySelectorAll('option');
+
+            options.forEach(function (option) {
+                const optionValue = option.value.toLowerCase();
+                if (optionValue.includes(inputValue)) {
+                    option.style.display = 'block';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    </script>
+    </html>
